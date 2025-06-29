@@ -7,7 +7,7 @@ from langchain_community.vectorstores import FAISS
 from langchain.prompts import ChatPromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
-from Internal_Knowledge_Assistant.common import rerank_documents
+from common import rerank_documents
 
 from langchain_community.chat_models import ChatOllama
 
@@ -24,7 +24,7 @@ def root():
 
 # Initialize components once (for performance)
 embedding_function = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-retriever = FAISS.load_local("Internal_Knowledge_Assistant/faiss_index", embedding_function, allow_dangerous_deserialization=True).as_retriever(search_kwargs={'k': 10})
+retriever = FAISS.load_local("faiss_index", embedding_function, allow_dangerous_deserialization=True).as_retriever(search_kwargs={'k': 10})
 
 
 llm = ChatOllama(model="mistral")
